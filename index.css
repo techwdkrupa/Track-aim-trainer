@@ -1,0 +1,131 @@
+:root {
+  --void: #0a0c08;
+  --panel: #12160f;
+  --panel-raised: #171c13;
+  --line: #2a3122;
+  --line-bright: #3d4630;
+
+  --amber: #ffb000;
+  --amber-dim: #7a5200;
+  --amber-glow: rgba(255, 176, 0, 0.35);
+
+  --cyan: #4dffea;
+  --cyan-dim: #1f6b60;
+  --cyan-glow: rgba(77, 255, 234, 0.45);
+
+  --danger: #ff4433;
+  --text: #ede8dc;
+  --text-dim: #8a8f7e;
+
+  --font-display: "Rajdhani", "Arial Narrow", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--void);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* faint scanline texture over the whole app, purely atmospheric */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.012) 0px,
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 0.85;
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.hud-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.engage-btn {
+  position: relative;
+  background: transparent;
+  border: 1px solid var(--amber);
+  color: var(--amber);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.engage-btn:hover,
+.engage-btn:focus-visible {
+  background: var(--amber);
+  color: var(--void);
+  box-shadow: 0 0 24px var(--amber-glow);
+}
+
+.engage-btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
